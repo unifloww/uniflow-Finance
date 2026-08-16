@@ -41,6 +41,8 @@ interface DataContextType {
   deleteGoal: (id: string) => void;
   isLoaded: boolean;
   syncStatus: 'synced' | 'syncing' | 'offline';
+  hideBalances: boolean;
+  toggleHideBalances: () => void;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -69,6 +71,18 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   const [syncStatus, setSyncStatus] = useState<'synced' | 'syncing' | 'offline'>(
     navigator.onLine ? 'synced' : 'offline'
   );
+
+  const [hideBalances, setHideBalances] = useState(() => {
+    return localStorage.getItem('uniflow_hide_balances') === 'true';
+  });
+
+  const toggleHideBalances = () => {
+    setHideBalances(prev => {
+      const newVal = !prev;
+      localStorage.setItem('uniflow_hide_balances', String(newVal));
+      return newVal;
+    });
+  };
 
   useEffect(() => {
     const handleOnline = () => {
@@ -199,7 +213,9 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       editGoal, 
       deleteGoal,
       isLoaded,
-      syncStatus
+      syncStatus,
+      hideBalances,
+      toggleHideBalances
     }}>
       {children}
     </DataContext.Provider>

@@ -50,6 +50,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const updatedProfile = { ...userProfile, ...data };
     setUserProfile(updatedProfile);
     localStorage.setItem('uniflow_user', JSON.stringify(updatedProfile));
+    
+    // Simpan ke database lokal agar persisten saat re-login
+    const dbStr = localStorage.getItem('uniflow_users_db');
+    const db = dbStr ? JSON.parse(dbStr) : {};
+    db[updatedProfile.email] = updatedProfile;
+    localStorage.setItem('uniflow_users_db', JSON.stringify(db));
   };
 
   return (

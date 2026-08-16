@@ -14,7 +14,9 @@ import {
   Activity,
   ArrowRightLeft,
   CreditCard,
-  PiggyBank
+  PiggyBank,
+  Eye,
+  EyeOff
 } from "lucide-react";
 import { formatCurrency } from "../lib/utils";
 import { motion } from "motion/react";
@@ -118,7 +120,7 @@ export function Dashboard() {
             </CardHeader>
             <CardContent className="pb-6 px-6">
               <div className="text-3xl sm:text-4xl font-black text-rose-600 tracking-tight mt-1">
-                {formatCurrency(expense)}
+                {hideBalances ? maskedValue : formatCurrency(expense)}
               </div>
               <p className="text-xs font-bold text-slate-400 dark:text-slate-500 mt-3">Total akumulasi</p>
             </CardContent>
@@ -135,7 +137,7 @@ export function Dashboard() {
             </CardHeader>
             <CardContent className="pb-6 px-6">
               <div className="text-3xl sm:text-4xl font-black tracking-tight mt-1">
-                {formatCurrency(income - expense)}
+                {hideBalances ? maskedValue : formatCurrency(income - expense)}
               </div>
               <p className="text-xs font-bold text-emerald-200 mt-3">Selisih masuk & keluar</p>
             </CardContent>

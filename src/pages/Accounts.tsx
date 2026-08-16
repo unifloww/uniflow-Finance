@@ -9,7 +9,7 @@ import {
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { formatCurrency } from "../lib/utils";
-import { Wallet, Plus, CreditCard, Landmark, Banknote, X, Edit2, Trash2 } from "lucide-react";
+import { Wallet, Plus, CreditCard, Landmark, Banknote, X, Edit2, Trash2, Eye, EyeOff } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 const PROVIDERS = [
@@ -45,7 +45,7 @@ const PROVIDERS = [
 ];
 
 export function Accounts() {
-  const { accounts, addAccount, editAccount, deleteAccount } = useData();
+  const { accounts, addAccount, editAccount, deleteAccount, hideBalances, toggleHideBalances } = useData();
 
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -132,11 +132,16 @@ export function Accounts() {
           <Card className="rounded-[2rem] border-0 shadow-xl bg-gradient-to-br from-white to-slate-50">
             <CardContent className="p-8 flex items-center justify-between">
               <div>
-                <h2 className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">
-                  Total Saldo Seluruh Akun
-                </h2>
+                <div className="flex items-center gap-3 mb-2">
+                  <h2 className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                    Total Saldo Seluruh Akun
+                  </h2>
+                  <button onClick={toggleHideBalances} className="text-slate-400 hover:text-[#059669] transition-colors">
+                    {hideBalances ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                  </button>
+                </div>
                 <div className="text-4xl sm:text-5xl font-black text-slate-800 dark:text-slate-200 tracking-tight">
-                  {formatCurrency(totalBalance)}
+                  {hideBalances ? "Rp •••••••" : formatCurrency(totalBalance)}
                 </div>
               </div>
               <div className="hidden sm:flex h-20 w-20 rounded-full bg-emerald-50 dark:bg-emerald-950/50 items-center justify-center shadow-inner border border-emerald-100 dark:border-emerald-900">
@@ -333,7 +338,7 @@ export function Accounts() {
                     {acc.type}
                   </p>
                   <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
-                    {formatCurrency(acc.balance)}
+                    {hideBalances ? "Rp •••••••" : formatCurrency(acc.balance)}
                   </div>
                 </CardContent>
               </Card>

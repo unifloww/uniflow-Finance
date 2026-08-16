@@ -30,16 +30,10 @@ export function Login() {
       // Simulate network request
       await new Promise((resolve) => setTimeout(resolve, 800));
       
-      let mockUser;
-      const existingStr = localStorage.getItem("uniflow_user");
-      if (existingStr) {
-        try {
-          const existing = JSON.parse(existingStr);
-          if (existing.email === email) {
-            mockUser = existing; // preserve name and other fields
-          }
-        } catch (e) {}
-      }
+      const dbStr = localStorage.getItem("uniflow_users_db");
+      const db = dbStr ? JSON.parse(dbStr) : {};
+      
+      let mockUser = db[email];
       
       if (!mockUser) {
         mockUser = {
@@ -49,6 +43,8 @@ export function Login() {
           role: "user" as const,
           status: "active" as const,
         };
+        db[email] = mockUser;
+        localStorage.setItem("uniflow_users_db", JSON.stringify(db));
       }
 
       localStorage.setItem("uniflow_user", JSON.stringify(mockUser));

@@ -38,6 +38,11 @@ export function Register() {
         role: "user" as const,
         status: "active" as const,
       };
+      
+      const dbStr = localStorage.getItem("uniflow_users_db");
+      const db = dbStr ? JSON.parse(dbStr) : {};
+      db[email] = mockUser;
+      localStorage.setItem("uniflow_users_db", JSON.stringify(db));
 
       localStorage.setItem("uniflow_user", JSON.stringify(mockUser));
       window.location.href = "/dashboard";
