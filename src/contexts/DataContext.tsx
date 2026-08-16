@@ -27,10 +27,18 @@ export interface Goal {
   deadline: string;
 }
 
+export interface Budget {
+  id: string;
+  category: string;
+  amount: number;
+  period: string; // e.g., '2026-08'
+}
+
 interface DataContextType {
   accounts: Account[];
   transactions: Transaction[];
   goals: Goal[];
+  budgets: Budget[];
   addAccount: (account: Omit<Account, 'id'>) => void;
   editAccount: (id: string, data: Partial<Account>) => void;
   deleteAccount: (id: string) => void;
@@ -39,6 +47,9 @@ interface DataContextType {
   addGoal: (goal: Omit<Goal, 'id'>) => void;
   editGoal: (id: string, goal: Partial<Goal>) => void;
   deleteGoal: (id: string) => void;
+  addBudget: (budget: Omit<Budget, 'id'>) => void;
+  editBudget: (id: string, budget: Partial<Budget>) => void;
+  deleteBudget: (id: string) => void;
   isLoaded: boolean;
   syncStatus: 'synced' | 'syncing' | 'offline';
   hideBalances: boolean;
@@ -61,12 +72,17 @@ const initialGoals: Goal[] = [
   { id: '1', name: 'Liburan Jepang', target: 20000000, current: 5000000, deadline: '2027-12-31' },
 ];
 
+const initialBudgets: Budget[] = [
+  { id: '1', category: 'Makanan & Minuman', amount: 3000000, period: `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}` }
+];
+
 export function DataProvider({ children }: { children: React.ReactNode }) {
   const { currentUser } = useAuth();
   
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [goals, setGoals] = useState<Goal[]>([]);
+  const [budgets, setBudgets] = useState<Budget[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [syncStatus, setSyncStatus] = useState<'synced' | 'syncing' | 'offline'>(
     navigator.onLine ? 'synced' : 'offline'
@@ -114,6 +130,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     const accountsData = localStorage.getItem(`uniflow_accounts_${currentUser.uid}`);
     const transactionsData = localStorage.getItem(`uniflow_transactions_${currentUser.uid}`);
     const goalsData = localStorage.getItem(`uniflow_goals_${currentUser.uid}`);
+    const budgetsData = localStorage.getItem(`uniflow_budgets_${currentUser.uid}`);
 
     if (accountsData) setAccounts(JSON.parse(accountsData));
     else setAccounts(initialAccounts);
@@ -123,6 +140,9 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
 
     if (goalsData) setGoals(JSON.parse(goalsData));
     else setGoals(initialGoals);
+    
+    if (budgetsData) setBudgets(JSON.parse(budgetsData));
+    else setBudgets(initialBudgets);
     
     setIsLoaded(true);
   }, [currentUser]);
@@ -145,6 +165,12 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem(`uniflow_goals_${currentUser.uid}`, JSON.stringify(goals));
     triggerSync();
   }, [goals, currentUser, isLoaded]);
+
+  useEffect(() => {
+    if (!currentUser || !isLoaded) return;
+    localStorage.setItem(`uniflow_budgets_${currentUser.uid}`, JSON.stringify(budgets));
+    triggerSync();
+  }, [budgets, currentUser, isLoaded]);
 
   const addAccount = (account: Omit<Account, 'id'>) => {
     setAccounts([...accounts, { ...account, id: crypto.randomUUID() }]);
@@ -199,11 +225,24 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     setGoals(goals.filter(g => g.id !== id));
   };
 
+  const addBudget = (budget: Omit<Budget, 'id'>) => {
+    setBudgets([...budgets, { ...budget, id: crypto.randomUUID() }]);
+  };
+
+  const editBudget = (id: string, updatedData: Partial<Budget>) => {
+    setBudgets(budgets.map(b => b.id === id ? { ...b, ...updatedData } : b));
+  };
+
+  const deleteBudget = (id: string) => {
+    setBudgets(budgets.filter(b => b.id !== id));
+  };
+
   return (
     <DataContext.Provider value={{ 
       accounts, 
       transactions, 
-      goals, 
+      goals,
+      budgets,
       addAccount, 
       editAccount,
       deleteAccount,
@@ -212,6 +251,9 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       addGoal, 
       editGoal, 
       deleteGoal,
+      addBudget,
+      editBudget,
+      deleteBudget,
       isLoaded,
       syncStatus,
       hideBalances,

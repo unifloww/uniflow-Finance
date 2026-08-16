@@ -20,10 +20,11 @@ import {
 } from "lucide-react";
 import { formatCurrency } from "../lib/utils";
 import { motion } from "motion/react";
+import { BudgetSection } from "../components/BudgetSection";
 
 export function Dashboard() {
   const { currentUser } = useAuth();
-  const { accounts, transactions } = useData();
+  const { accounts, transactions, hideBalances, toggleHideBalances } = useData();
 
   const totalBalance = useMemo(() => {
     return accounts.reduce((sum, acc) => sum + acc.balance, 0);
@@ -59,6 +60,8 @@ export function Dashboard() {
     show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
   };
 
+  const maskedValue = "Rp •••••••";
+
   return (
     <motion.div 
       variants={containerVariants}
@@ -66,13 +69,22 @@ export function Dashboard() {
       animate="show"
       className="space-y-6"
     >
-      <motion.div variants={itemVariants}>
-        <h1 className="text-2xl font-bold tracking-tight text-white">
-          Dashboard
-        </h1>
-        <p className="text-sm text-emerald-100">
-          Ringkasan keuangan Anda saat ini.
-        </p>
+      <motion.div variants={itemVariants} className="flex flex-row items-end justify-between">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-white">
+            Dashboard
+          </h1>
+          <p className="text-sm text-emerald-100">
+            Ringkasan keuangan Anda saat ini.
+          </p>
+        </div>
+        <button 
+          onClick={toggleHideBalances} 
+          className="flex items-center gap-2 px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-sm font-bold transition-colors"
+        >
+          {hideBalances ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+          <span className="hidden sm:inline">{hideBalances ? "Tampilkan" : "Sembunyikan"}</span>
+        </button>
       </motion.div>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -86,7 +98,7 @@ export function Dashboard() {
             </CardHeader>
             <CardContent className="pb-6 px-6">
               <div className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-slate-100 tracking-tight mt-1">
-                {formatCurrency(totalBalance)}
+                {hideBalances ? maskedValue : formatCurrency(totalBalance)}
               </div>
               <p className="text-xs font-bold text-slate-400 dark:text-slate-500 mt-3">Dari {accounts.length} akun aktif</p>
             </CardContent>
@@ -103,7 +115,7 @@ export function Dashboard() {
             </CardHeader>
             <CardContent className="pb-6 px-6">
               <div className="text-3xl sm:text-4xl font-black text-[#059669] tracking-tight mt-1">
-                {formatCurrency(income)}
+                {hideBalances ? maskedValue : formatCurrency(income)}
               </div>
               <p className="text-xs font-bold text-slate-400 dark:text-slate-500 mt-3">Total akumulasi</p>
             </CardContent>
@@ -145,9 +157,9 @@ export function Dashboard() {
         </motion.div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <motion.div variants={itemVariants}>
-          <Card className="rounded-[2rem] border-0 shadow-xl bg-white dark:bg-slate-900 col-span-1 overflow-hidden">
+      <div className="grid gap-6 lg:grid-cols-3">
+        <motion.div variants={itemVariants} className="lg:col-span-2">
+          <Card className="rounded-[2rem] border-0 shadow-xl bg-white dark:bg-slate-900 overflow-hidden h-full">
             <CardHeader className="border-b border-slate-50 bg-slate-50 dark:bg-slate-800/50/50 pb-4">
               <CardTitle className="text-lg text-slate-800 dark:text-slate-200">Transaksi Terakhir</CardTitle>
             </CardHeader>
@@ -225,8 +237,13 @@ export function Dashboard() {
           </Card>
         </motion.div>
         
-        <motion.div variants={itemVariants}>
-          <Card className="rounded-[2rem] border-0 shadow-xl bg-white dark:bg-slate-900 col-span-1 overflow-hidden h-full">
+        <div className="flex flex-col gap-6 lg:col-span-1">
+          <motion.div variants={itemVariants}>
+            <BudgetSection />
+          </motion.div>
+          
+          <motion.div variants={itemVariants}>
+            <Card className="rounded-[2rem] border-0 shadow-xl bg-white dark:bg-slate-900 overflow-hidden h-full">
             <CardHeader className="border-b border-slate-50 bg-slate-50 dark:bg-slate-800/50/50 pb-4">
               <CardTitle className="text-lg text-slate-800 dark:text-slate-200">Akun & Dompet</CardTitle>
             </CardHeader>
@@ -260,6 +277,7 @@ export function Dashboard() {
             </CardContent>
           </Card>
         </motion.div>
+        </div>
       </div>
     </motion.div>
   );
