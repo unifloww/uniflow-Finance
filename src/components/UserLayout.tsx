@@ -70,7 +70,7 @@ export function UserLayout() {
       {/* Sidebar for Desktop */}
       <aside className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0 lg:border-r lg:border-[#10b981] lg:bg-[#059669]">
         <div className="flex h-16 items-center px-6 border-b border-[#10b981]">
-          <img src="https://dash.uniflow.my.id/uniflow-logo-light.png" alt="UniFlow" className="h-8 w-auto mr-2 object-contain" />
+          <img src="https://firebasestorage.googleapis.com/v0/b/uniflow/o/Uniflow%20Finace.jpg?alt=media&token=6151287b-2c30-471d-a051-cefa0ad6ae58" alt="UniFlow" className="h-8 w-8 mr-2 object-cover rounded-xl mix-blend-multiply dark:mix-blend-normal shadow-sm" />
           <span className="text-xl font-bold text-white">Finance</span>
         </div>
         
@@ -126,7 +126,7 @@ export function UserLayout() {
         {/* Mobile Header */}
         <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-[#10b981] bg-[#059669] px-4 lg:hidden">
           <div className="flex items-center">
-            <img src="https://dash.uniflow.my.id/uniflow-logo-light.png" alt="UniFlow" className="h-6 w-auto object-contain" />
+            <img src="https://firebasestorage.googleapis.com/v0/b/uniflow/o/Uniflow%20Finace.jpg?alt=media&token=6151287b-2c30-471d-a051-cefa0ad6ae58" alt="UniFlow" className="h-6 w-6 object-cover rounded-md mix-blend-multiply" />
           </div>
           <div className="flex items-center space-x-2">
             {renderSyncIndicator(true)}

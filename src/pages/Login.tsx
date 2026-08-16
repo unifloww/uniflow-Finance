@@ -79,9 +79,9 @@ export function Login() {
         className="flex items-center justify-center mb-8 z-10"
       >
         <img
-          src="https://dash.uniflow.my.id/uniflow-logo-light.png"
+          src="https://firebasestorage.googleapis.com/v0/b/uniflow/o/Uniflow%20Finace.jpg?alt=media&token=6151287b-2c30-471d-a051-cefa0ad6ae58"
           alt="UniFlow"
-          className="h-12 w-auto mr-3 object-contain drop-shadow-lg"
+          className="h-12 w-12 mr-3 object-cover rounded-xl mix-blend-multiply"
         />
         <span className="text-4xl font-bold tracking-tight text-white drop-shadow-md">
           Finance
