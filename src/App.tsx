@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { DataProvider } from './contexts/DataContext';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -46,8 +46,8 @@ function LandingPage() {
           Atur Dana, Capai Impian. Tracking Pemasukan dan Pengeluaran berdasarkan Kategori secara instan dan aman.
         </p>
         <div className="flex gap-4">
-          <a href="/login" className="rounded-full bg-white px-8 py-3.5 text-sm font-bold text-[#059669] shadow-lg hover:shadow-xl hover:bg-slate-50 transition-all transform hover:-translate-y-0.5">Masuk</a>
-          <a href="/register" className="rounded-full border border-emerald-300 bg-transparent px-8 py-3.5 text-sm font-bold text-white shadow-md hover:bg-white/10 hover:border-white transition-all">Daftar Gratis</a>
+          <Link to="/login" className="rounded-full bg-white px-8 py-3.5 text-sm font-bold text-[#059669] shadow-lg hover:shadow-xl hover:bg-slate-50 transition-all transform hover:-translate-y-0.5">Masuk</Link>
+          <Link to="/register" className="rounded-full border border-emerald-300 bg-transparent px-8 py-3.5 text-sm font-bold text-white shadow-md hover:bg-white/10 hover:border-white transition-all">Daftar Gratis</Link>
         </div>
       </div>
       <footer className="py-6 text-center text-sm font-medium text-emerald-100/70">

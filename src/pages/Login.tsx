@@ -52,7 +52,7 @@ export function Login() {
       }
 
       localStorage.setItem("uniflow_user", JSON.stringify(mockUser));
-      navigate("/dashboard");
+      window.location.href = "/dashboard";
     } catch (err: any) {
       setError("Gagal login. Periksa kembali email dan password Anda.");
     } finally {

@@ -40,7 +40,7 @@ export function Register() {
       };
 
       localStorage.setItem("uniflow_user", JSON.stringify(mockUser));
-      navigate("/dashboard");
+      window.location.href = "/dashboard";
     } catch (err: any) {
       setError("Gagal mendaftar. Silakan coba lagi.");
     } finally {
