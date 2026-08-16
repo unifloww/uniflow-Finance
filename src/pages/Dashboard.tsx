@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useData } from "../contexts/DataContext";
 import {
@@ -22,8 +22,46 @@ import { formatCurrency } from "../lib/utils";
 import { motion } from "motion/react";
 import { BudgetSection } from "../components/BudgetSection";
 
+const financialQuotes = [
+  "Uang adalah hamba yang baik, namun tuan yang buruk.",
+  "Jangan menabung apa yang tersisa setelah dihabiskan, tapi habiskan apa yang tersisa setelah ditabung.",
+  "Kekayaan bukanlah tentang memiliki banyak uang, melainkan tentang memiliki banyak pilihan.",
+  "Setiap Rupiah yang Anda hemat adalah benih untuk masa depan Anda.",
+  "Investasi terbaik yang bisa Anda lakukan adalah pada diri Anda sendiri.",
+  "Perdamaian finansial bukan tentang membeli barang, melainkan belajar hidup dengan kurang dari yang Anda hasilkan.",
+  "Kontrol pengeluaran Anda, sebelum pengeluaran Anda mengontrol Anda.",
+  "Bukan seberapa banyak uang yang Anda hasilkan, tapi seberapa banyak yang Anda simpan.",
+  "Ketenangan pikiran finansial adalah bentuk tertinggi dari kekayaan.",
+];
+
 export function Dashboard() {
-  const { currentUser } = useAuth();
+  const { currentUser, userProfile } = useAuth();
+  const [greeting, setGreeting] = useState("Halo");
+  const [currentTimeStr, setCurrentTimeStr] = useState("");
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const hours = now.getHours();
+      
+      let newGreeting = "Selamat Malam";
+      if (hours >= 5 && hours < 11) newGreeting = "Selamat Pagi";
+      else if (hours >= 11 && hours < 15) newGreeting = "Selamat Siang";
+      else if (hours >= 15 && hours < 18) newGreeting = "Selamat Sore";
+      
+      setGreeting(newGreeting);
+      setCurrentTimeStr(now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }));
+    };
+
+    updateTime();
+    const intervalId = setInterval(updateTime, 60000);
+    return () => clearInterval(intervalId);
+  }, []);
+  const randomQuote = useMemo(() => {
+    return financialQuotes[Math.floor(Math.random() * financialQuotes.length)];
+  }, []);
+
+  const firstName = userProfile?.name?.split(" ")[0] || currentUser?.email?.split("@")[0] || "Teman";
   const { accounts, transactions, hideBalances, toggleHideBalances } = useData();
 
   const totalBalance = useMemo(() => {
@@ -71,11 +109,12 @@ export function Dashboard() {
     >
       <motion.div variants={itemVariants} className="flex flex-row items-end justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">
-            Dashboard
+          <h1 className="text-3xl font-bold tracking-tight text-white">
+            {greeting}, {firstName} 👋
           </h1>
-          <p className="text-sm text-emerald-100">
-            Ringkasan keuangan Anda saat ini.
+          <p className="text-sm text-emerald-100 max-w-xl mt-1 opacity-90">
+            "{randomQuote}"<br />
+            <span className="font-semibold text-white/90 inline-block mt-2 px-3 py-1 bg-white/10 rounded-full text-xs">🕒 {currentTimeStr} — Jangan lupa catat keuanganmu hari ini!</span>
           </p>
         </div>
         <button 

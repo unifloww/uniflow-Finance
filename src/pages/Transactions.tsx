@@ -138,7 +138,7 @@ export function Transactions() {
     doc.rect(0, 0, 210, 30, "F");
     
     try {
-      const response = await fetch("https://firebasestorage.googleapis.com/v0/b/uniflow/o/Uniflow%20Finace.jpg?alt=media&token=6151287b-2c30-471d-a051-cefa0ad6ae58");
+      const response = await fetch("https://firebasestorage.googleapis.com/v0/b/uniflow/o/Uniflow%20White.png?alt=media&token=ed8e2972-f297-4861-9920-c8145506122d");
       const blob = await response.blob();
       const base64data = await new Promise<string>((resolve) => {
         const reader = new FileReader();

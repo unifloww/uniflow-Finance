@@ -1,0 +1,4 @@
+sed -i 's/Lebih Damai, Lebih Terkendali/🚀 Cara Cerdas Atur Keuangan/g' src/pages/LandingPage.tsx
+sed -i 's/Bukan Sekadar Angka.<br \/>/Kendali Penuh Atas Uangmu.<br \/>/g' src/pages/LandingPage.tsx
+sed -i 's/Ini Tentang <span className="text-transparent bg-clip-text bg-gradient-to-r from-\[#059669\] to-teal-500">Ketenangan Hidup<\/span> Anda./Masa Depan <span className="text-transparent bg-clip-text bg-gradient-to-r from-\[#059669\] to-teal-500">Lebih Tenang<\/span>./g' src/pages/LandingPage.tsx
+sed -i 's/UniFlow Finance hadir bukan hanya untuk mencatat pengeluaran, tetapi untuk membantu Anda membangun kebiasaan finansial yang sehat, bebas stres, dan meraih masa depan keluarga yang lebih cerah./Hentikan kebingungan "uang saya lari ke mana?". Lacak pemasukan, cegah pengeluaran impulsif, dan capai tujuan finansial Anda dengan jauh lebih mudah tanpa perlu pusing mikirin rumus rumit./g' src/pages/LandingPage.tsx

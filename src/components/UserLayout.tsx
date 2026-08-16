@@ -69,12 +69,12 @@ export function UserLayout() {
     <div className="flex min-h-screen bg-[#059669] pb-16 lg:pb-0">
       {/* Sidebar for Desktop */}
       <aside className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0 lg:border-r lg:border-[#10b981] lg:bg-[#059669]">
-        <div className="flex h-16 items-center px-6 border-b border-[#10b981]">
-          <img src="https://firebasestorage.googleapis.com/v0/b/uniflow/o/Uniflow%20Finace.jpg?alt=media&token=6151287b-2c30-471d-a051-cefa0ad6ae58" alt="UniFlow" className="h-8 w-8 mr-2 object-cover rounded-xl mix-blend-multiply dark:mix-blend-normal shadow-sm" />
-          <span className="text-xl font-bold text-white">Finance</span>
+        <div className="flex h-32 items-center justify-center px-4 border-b border-[#10b981]">
+          <img src="https://firebasestorage.googleapis.com/v0/b/uniflow/o/Uniflow%20White.png?alt=media&token=ed8e2972-f297-4861-9920-c8145506122d" alt="UniFlow" className="h-24 sm:h-28 w-auto object-contain drop-shadow-xl hover:scale-105 transition-transform cursor-pointer" />
+          
         </div>
         
-        <div className="flex h-[calc(100vh-4rem)] flex-col justify-between p-4">
+        <div className="flex h-[calc(100vh-8rem)] flex-col justify-between p-4">
           <nav className="space-y-2 relative">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -124,9 +124,9 @@ export function UserLayout() {
       {/* Main Content */}
       <main className="flex flex-1 flex-col overflow-y-auto lg:pl-64 overflow-x-hidden">
         {/* Mobile Header */}
-        <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-[#10b981] bg-[#059669] px-4 lg:hidden">
+        <header className="sticky top-0 z-20 flex h-28 items-center justify-between border-b border-[#10b981] bg-[#059669] px-4 py-2 lg:hidden">
           <div className="flex items-center">
-            <img src="https://firebasestorage.googleapis.com/v0/b/uniflow/o/Uniflow%20Finace.jpg?alt=media&token=6151287b-2c30-471d-a051-cefa0ad6ae58" alt="UniFlow" className="h-6 w-6 object-cover rounded-md mix-blend-multiply" />
+            <img src="https://firebasestorage.googleapis.com/v0/b/uniflow/o/Uniflow%20White.png?alt=media&token=ed8e2972-f297-4861-9920-c8145506122d" alt="UniFlow" className="h-20 w-auto max-w-[180px] object-contain drop-shadow-md" />
           </div>
           <div className="flex items-center space-x-2">
             {renderSyncIndicator(true)}

@@ -17,7 +17,7 @@ export function LandingPage() {
   }
 
   const savingsPerYear = bocorAlus * 365;
-  const logoUrl = "https://firebasestorage.googleapis.com/v0/b/uniflow/o/Uniflow%20Finace.jpg?alt=media&token=6151287b-2c30-471d-a051-cefa0ad6ae58";
+  const logoUrl = "https://firebasestorage.googleapis.com/v0/b/uniflow/o/Uniflow%20White.png?alt=media&token=ed8e2972-f297-4861-9920-c8145506122d";
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-50 dark:bg-slate-900 relative selection:bg-[#059669] selection:text-white font-sans overflow-x-hidden">
@@ -28,8 +28,8 @@ export function LandingPage() {
       {/* Navigation */}
       <nav className="w-full px-6 py-4 flex items-center justify-between absolute top-0 left-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
         <div className="flex items-center gap-3">
-          <img src={logoUrl} alt="UniFlow" className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl object-cover mix-blend-multiply dark:mix-blend-normal shadow-sm" />
-          <span className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Finance</span>
+          <img src={logoUrl} alt="UniFlow" className="h-16 sm:h-20 w-auto object-contain invert dark:invert-0 drop-shadow-lg" />
+          
         </div>
         <div className="hidden sm:flex items-center gap-6">
           <Link to="/login" className="text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-[#059669] dark:hover:text-[#10b981] transition-colors">Masuk</Link>
@@ -48,16 +48,16 @@ export function LandingPage() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
               </span>
-              Lebih Damai, Lebih Terkendali
+              🚀 Cara Cerdas Atur Keuangan
             </div>
             
             <h1 className="text-5xl md:text-7xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1] mb-6">
-              Bukan Sekadar Angka.<br />
-              Ini Tentang <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#059669] to-teal-500">Ketenangan Hidup</span> Anda.
+              Kendali Penuh Atas Uangmu.<br />
+              Masa Depan <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#059669] to-teal-500">Lebih Tenang</span>.
             </h1>
             
             <p className="mb-10 max-w-2xl text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-medium mx-auto">
-              UniFlow Finance hadir bukan hanya untuk mencatat pengeluaran, tetapi untuk membantu Anda membangun kebiasaan finansial yang sehat, bebas stres, dan meraih masa depan keluarga yang lebih cerah.
+              Hentikan kebingungan "uang saya lari ke mana?". Lacak pemasukan, cegah pengeluaran impulsif, dan capai tujuan finansial Anda dengan jauh lebih mudah tanpa perlu pusing mikirin rumus rumit.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center mx-auto">
@@ -169,7 +169,7 @@ export function LandingPage() {
       {/* Footer */}
       <footer className="py-12 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 text-center relative z-10">
         <div className="max-w-5xl mx-auto px-6 flex flex-col items-center">
-          <img src={logoUrl} alt="UniFlow" className="h-12 w-12 rounded-xl mb-6 mix-blend-multiply dark:mix-blend-normal grayscale hover:grayscale-0 transition-all opacity-80 hover:opacity-100" />
+          <img src={logoUrl} alt="UniFlow" className="h-20 w-auto object-contain mb-6 invert dark:invert-0 transition-all opacity-80 hover:opacity-100" />
           <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-2">UniFlow Finance</h4>
           <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-8">Bersama Membangun Kesejahteraan Berkelanjutan.</p>
           <div className="text-sm text-slate-400 dark:text-slate-500">

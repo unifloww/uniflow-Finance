@@ -76,13 +76,10 @@ export function Register() {
         className="flex items-center justify-center mb-8 z-10"
       >
         <img
-          src="https://firebasestorage.googleapis.com/v0/b/uniflow/o/Uniflow%20Finace.jpg?alt=media&token=6151287b-2c30-471d-a051-cefa0ad6ae58"
+          src="https://firebasestorage.googleapis.com/v0/b/uniflow/o/Uniflow%20White.png?alt=media&token=ed8e2972-f297-4861-9920-c8145506122d"
           alt="UniFlow"
-          className="h-12 w-12 mr-3 object-cover rounded-xl mix-blend-multiply"
+          className="h-32 sm:h-40 w-auto object-contain drop-shadow-2xl"
         />
-        <span className="text-4xl font-bold tracking-tight text-white drop-shadow-md">
-          Finance
-        </span>
       </motion.div>
 
       <motion.div 

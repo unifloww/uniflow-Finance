@@ -1,0 +1,2 @@
+sed -i 's/className="h-12 sm:h-16 w-auto object-contain invert dark:invert-0 drop-shadow-md"/className="h-16 sm:h-20 w-auto object-contain invert dark:invert-0 drop-shadow-lg"/g' src/pages/LandingPage.tsx
+sed -i 's/className="h-14 w-auto object-contain mb-6 invert dark:invert-0 transition-all opacity-80 hover:opacity-100"/className="h-20 w-auto object-contain mb-6 invert dark:invert-0 transition-all opacity-80 hover:opacity-100"/g' src/pages/LandingPage.tsx
